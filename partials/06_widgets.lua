@@ -126,22 +126,26 @@ for s = 1, screen.count() do
     top_layout:set_middle(mytasklist[s])
     top_layout:set_right(top_right_layout)
 
-    -- bottom layout
+    -- define bottom layout
     local bot_left_layout = wibox.layout.fixed.horizontal()
     bot_left_layout:add(delimiter)
-    bot_left_layout:add(mdirbox)
-
+    bot_left_layout:add(musicbox)
+    bot_left_layout:add(delimiter)
+    bot_left_layout:add(volbox)
+    -- local bot_middle_layout = wibox.layout.fixed.horizontal()
     local bot_right_layout = wibox.layout.fixed.horizontal()
     bot_right_layout:add(delimiter)
-    bot_right_layout:add(musicbox)
+    bot_right_layout:add(wifibox)
     bot_right_layout:add(delimiter)
-    bot_right_layout:add(volbox)
-    bot_right_layout:add(delimiter)
-    bot_right_layout:add(pacbox)
-    bot_right_layout:add(delimiter)
+
+    local top_layout = wibox.layout.align.horizontal()
+    top_layout:set_left(top_left_layout)
+    top_layout:set_middle(mytasklist[s])
+    top_layout:set_right(top_right_layout)
 
     local bot_layout = wibox.layout.align.horizontal()
     bot_layout:set_left(bot_left_layout)
+    -- bot_layout:set_middle(mytasklist[s])
     bot_layout:set_right(bot_right_layout)
 
     mywibox_top[s]:set_widget(top_layout)

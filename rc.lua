@@ -52,10 +52,10 @@ log             = gnarly.util.log
 --
 --
 config_dir          = awful.util.getdir("config")
-local script_dir    = join({config_dir, "scripts"}, "/")
+script_dir          = join({config_dir, "scripts"}, "/")
 local partials_dir  = join({config_dir, "partials"}, "/")
 local partials      = scandir(partials_dir)
 for i = 1, #partials do
+  -- log("loading " .. partials[i])
   dofile(join({partials_dir, partials[i]}, "/"))
-  -- log("loaded " .. partials[i])
 end

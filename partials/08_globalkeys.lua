@@ -110,7 +110,37 @@ globalkeys = awful.util.table.join(
           end
         end
       end)
-    end)
+    end),
+
+
+    -- show clients menu, unminimize client on keypress
+    --
+    -- TODO minimize sucks, probably better implemented as a history
+    -- stack, like client.focus.history
+    --
+    awful.key({ modkey, }, "n",
+    function (_) 
+            -- construct a table of the clients on the current tag
+            -- tht are 
+            local tag = awful.tag.selected()
+            local mcs = {} -- minimized clients
+            for j, c in pairs(tag:clients()) do
+                    if c.minimized then
+                            table.insert(mcs, {c.name, 
+                            function()
+                                    awful.tag.viewonly(c:tags()[1])
+                                    client.focus = c
+                            end,
+                            c.icon })
+                    end
+            end
+            if #mcs == 1 then
+                    mcs[1][2]()   -- raise if only one client minimized
+            else
+                    awful.menu(mcs):show()  -- show the menu
+            end
+    end )
+
 
     -- awful.key({ modkey,           }, "a", -- add tag
     -- function ()

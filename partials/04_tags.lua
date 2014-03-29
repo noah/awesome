@@ -32,7 +32,6 @@ local function tag_index_from_name(n)
 
         for i=1, #tags[1] do
             if string.match(tags[1][i].name, n) then
-                    log(n .. " on " .. i)
                     return i
             end
         end

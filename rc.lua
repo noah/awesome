@@ -41,6 +41,8 @@ printf          = string.format
 gnarly          = require("gnarly")
 require("gnarly.util")
 
+keydoc          = require("keydoc")
+
 
 -- export my functions
 --
@@ -56,6 +58,5 @@ script_dir          = join({config_dir, "scripts"}, "/")
 local partials_dir  = join({config_dir, "partials"}, "/")
 local partials      = scandir(partials_dir)
 for i = 1, #partials do
-  -- log("loading " .. partials[i])
   dofile(join({partials_dir, partials[i]}, "/"))
 end

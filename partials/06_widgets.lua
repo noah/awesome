@@ -128,12 +128,12 @@ for s = 1, screen.count() do
 
     -- define bottom layout
     local bot_left_layout = wibox.layout.fixed.horizontal()
-    bot_left_layout:add(delimiter)
-    bot_left_layout:add(musicbox)
-    bot_left_layout:add(delimiter)
-    bot_left_layout:add(volbox)
+    bot_left_layout:add(mdirbox)
     -- local bot_middle_layout = wibox.layout.fixed.horizontal()
     local bot_right_layout = wibox.layout.fixed.horizontal()
+    bot_right_layout:add(volbox)
+    bot_right_layout:add(delimiter)
+    bot_right_layout:add(musicbox)
     bot_right_layout:add(delimiter)
     bot_right_layout:add(wifibox)
     bot_right_layout:add(delimiter)

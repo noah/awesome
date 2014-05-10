@@ -32,10 +32,11 @@ awful.rules.rules = {
     { rule = { class = "mplayer" },                 properties = { floating = false } },
     { rule = { class = "pinentry" },                properties = { floating = true } },
     { rule = { class = "XMathematica" },            properties = { floating = false } },
-    { rule = { class = "Nautilus" },            properties = { floating = false } },
-    { rule = { class = "mono" },            properties = { floating = false} },
-    { rule = { class = "devede" },            properties = { floating = true} },
-    { rule = { class = "Devede" },            properties = { floating = true} },
+    { rule = { class = "Nautilus" },                properties = { floating = false } },
+    { rule = { class = "mono" },                    properties = { floating = false} },
+    { rule = { class = "devede" },                  properties = { floating = true} },
+    { rule = { class = "Devede" },                  properties = { floating = true} },
+    { rule = { class = "XMathematica" },            properties = { floating = false} }
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },

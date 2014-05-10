@@ -120,7 +120,11 @@ globalkeys = awful.util.table.join(
       awful.key({ modkey, "Control", }, 
                   "Prior",  function () awful.util.spawn(script_dir .. "/playback.sh prev",false) end, "Skip to prev track"),
       awful.key({ modkey, "Control", }, 
-                  "Home",   function () awful.util.spawn(script_dir .. "/playback.sh pause",false)    end, "Pause toggle playback")
+                  "Home",   function () awful.util.spawn(script_dir .. "/playback.sh pause",false)    end, "Pause toggle playback"),
+      awful.key({ modkey, "Control", }, 
+                  "Right",  function () awful.util.spawn(script_dir .. "/playback.sh ffwd",false)    end, "Fast foward playing track by 5 seconds"),
+      awful.key({ modkey, "Control", }, 
+                  "Left",  function () awful.util.spawn(script_dir .. "/playback.sh rew",false)    end, "Rewind playing track by 5 seconds")
 
     -- Tags TODO
     -- awful.key({ modkey, }, "d", function () awful.tag.delete() end),    -- delete tag

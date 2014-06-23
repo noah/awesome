@@ -53,6 +53,6 @@ hext:connect_signal("timeout", function ()
   local s       = addLeadingZero(timeToHex(dt.sec, over60))
   local hex     = '"#' .. h .. m .. s .. '"'
   -- log(hex)
-  awful.util.spawn('hsetroot -solid ' .. hex)
+  awful.util.spawn_with_shell('hsetroot -solid ' .. hex)
 end)
 hext:start()

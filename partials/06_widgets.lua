@@ -174,11 +174,11 @@ vicious.register(membox, vicious.widgets.mem,
 -- 
 vicious.register(wifibox,   vicious.widgets.wifi,   "${ssid} ${link}% ${rate} MB/s", 16, "wlp3s0")
 vicious.register(cpugraph, vicious.widgets.cpu, "$1", 3)
-vicious.register(volbox, vicious.contrib.pulse, "vol $1%", 2, "alsa_output.pci-0000_00_1b.0.analog-stereo")
+vicious.register(volbox, vicious.contrib.pulse, "vol $1%", 2, "alsa_output.pci-0000_00_1b.0.hdmi-stereo-extra1")
 volbox:buttons(awful.util.table.join(
     awful.button({ }, 1, function () awful.util.spawn("pavucontrol") end),
-    awful.button({ }, 5, function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_1b.0.analog-stereo") end),
-    awful.button({ }, 4, function () vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_1b.0.analog-stereo") end)
+    awful.button({ }, 5, function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_1b.0.hdmi-stereo-extra1") end),
+    awful.button({ }, 4, function () vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_1b.0.hdmi-stereo-extra1") end)
 ))
 -- 
 vicious.register(musicbox, gnarly.cmus, 

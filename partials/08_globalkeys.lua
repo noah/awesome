@@ -112,9 +112,9 @@ globalkeys = awful.util.table.join(
     --  Home:    Home key
     keydoc.group("Media keys"),
       awful.key({ modkey, "Control", }, 
-                  "Up",     function () awful.util.spawn("amixer -c 0 sset Master 1+%", false) end, "Increase volume 1%"),
+                  "Up",     function () awful.util.spawn(script_dir .. "/volume.sh +", false) end, "Increase volume 1%"),
       awful.key({ modkey, "Control", }, 
-                  "Down",   function () awful.util.spawn("amixer -c 0 sset Master 1-%", false) end, "Decrease volume 1%"),
+                  "Down",   function () awful.util.spawn(script_dir .. "/volume.sh -", false) end, "Decrease volume 1%"),
       awful.key({ modkey, "Control", }, 
                   "Next",   function () awful.util.spawn(script_dir .. "/playback.sh next",false) end, "Skip to next track"),
       awful.key({ modkey, "Control", }, 

@@ -1,4 +1,8 @@
-
+-- vi-like menu navigation bindings
+--
+awful.menu.menu_keys.up     = { "k" }
+awful.menu.menu_keys.down   = { "j" }
+awful.menu.menu_keys.close  = { "q", "Escape" }
 
 globalkeys = awful.util.table.join(
 
@@ -68,7 +72,7 @@ globalkeys = awful.util.table.join(
                 if #mcs == 1 then
                         mcs[1][2]()   -- raise if only one client minimized
                 else
-                        awful.menu(mcs):show()  -- show the menu
+                        awful.menu(mcs):show()
                 end
         end, "show maximize menu" ),
         awful.key({ modkey, "Control" }, "n", awful.client.restore, "restore client"),

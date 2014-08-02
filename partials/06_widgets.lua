@@ -67,6 +67,7 @@ pacbox      = wibox.widget.textbox()
 wifibox     = wibox.widget.textbox()
 musicbox    = wibox.widget.textbox()
 mdirbox     = wibox.widget.textbox()
+batterybox  = wibox.widget.textbox()
 
 cpugraph    = awful.widget.graph()
 cpugraph:set_width(100)
@@ -139,6 +140,8 @@ for s = 1, screen.count() do
     bot_right_layout:add(delimiter)
     bot_right_layout:add(wifibox)
     bot_right_layout:add(delimiter)
+    bot_right_layout:add(batterybox)
+    bot_right_layout:add(delimiter)
 
     local top_layout = wibox.layout.align.horizontal()
     top_layout:set_left(top_left_layout)
@@ -158,6 +161,7 @@ end
 gnarly.cmus     = require("gnarly.cmus")
 gnarly.mdir     = require("gnarly.mdir")
 gnarly.yaourt   = require("gnarly.yaourt")
+gnarly.battery  = require("gnarly.battery")
 
 -- vicious widgets
 vicious.register(datebox, vicious.widgets.date, "%A %Y-%m-%d %H:%M:%S %Z", 2)
@@ -195,6 +199,12 @@ vicious.register(musicbox, gnarly.cmus,
                               T["{CRS}"]
                           )
     end, 2)
+
+vicious.register(batterybox, gnarly.battery,
+  function(widget, T)
+          return printf("%s: %u%%", T['{status}'], T['{charge}'])
+  end, 11)
+
 -- 
 vicious.register(mdirbox, gnarly.mdir, 
     function(widget, mailboxes)
@@ -218,3 +228,4 @@ vicious.register(pacbox, gnarly.yaourt,
   function(widget, n)
     return n["pacman"] .. " (pacman) " .. n["aur"] .. " (aur)"
   end, 643)
+

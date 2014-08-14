@@ -23,16 +23,24 @@ awful.rules.rules = {
     -- { rule = { class = "xboard" },      properties = { floating = true } },
     { rule = { class = "Chromium" },                properties = { floating = false } },
     { rule = { class = "MPlayer" },                 properties = { floating = false } },
-    { rule = { class = "free-jin-JinApplication" }, properties = { floating = false } },
+    { rule = { class = "free-jin-JinApplication",
+                instance = "sun-awt-X11-XFramePeer" }, properties = { floating = false } },
     { rule = { class = "gimp" },                    properties = { floating = true } },
     { rule = { class = "google-chrome"},            properties = { floating = false } },
     { rule = { class = "Google-chrome"},            properties = { floating = false } },
     { rule = { class = "libreoffice-calc" },        properties = { floating = false } },
     { rule = { class = "libreoffice-writer" },      properties = { floating = false } },
     { rule = { class = "mplayer" },                 properties = { floating = false } },
+    { rule = { 
+      class = "Nautilus",
+      instance="nautilus" },
+      properties = { 
+        floating = true,
+        sticky = true
+      } 
+    },
     { rule = { class = "pinentry" },                properties = { floating = true } },
     { rule = { class = "XMathematica" },            properties = { floating = false } },
-    { rule = { class = "Nautilus" },                properties = { floating = false } },
     { rule = { class = "mono" },                    properties = { floating = false} },
     { rule = { class = "devede" },                  properties = { floating = true} },
     { rule = { class = "Devede" },                  properties = { floating = true} },

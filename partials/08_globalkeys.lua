@@ -1,4 +1,8 @@
-
+-- vi-like menu navigation bindings
+--
+awful.menu.menu_keys.up     = { "k" }
+awful.menu.menu_keys.down   = { "j" }
+awful.menu.menu_keys.close  = { "q", "Escape" }
 
 globalkeys = awful.util.table.join(
 
@@ -68,7 +72,7 @@ globalkeys = awful.util.table.join(
                 if #mcs == 1 then
                         mcs[1][2]()   -- raise if only one client minimized
                 else
-                        awful.menu(mcs):show()  -- show the menu
+                        awful.menu(mcs):show()
                 end
         end, "show maximize menu" ),
         awful.key({ modkey, "Control" }, "n", awful.client.restore, "restore client"),
@@ -112,9 +116,9 @@ globalkeys = awful.util.table.join(
     --  Home:    Home key
     keydoc.group("Media keys"),
       awful.key({ modkey, "Control", }, 
-                  "Up",     function () awful.util.spawn("amixer -c 0 sset Master 1+%", false) end, "Increase volume 1%"),
+                  "Up",     function () awful.util.spawn(script_dir .. "/volume.sh +", false) end, "Increase volume 1%"),
       awful.key({ modkey, "Control", }, 
-                  "Down",   function () awful.util.spawn("amixer -c 0 sset Master 1-%", false) end, "Decrease volume 1%"),
+                  "Down",   function () awful.util.spawn(script_dir .. "/volume.sh -", false) end, "Decrease volume 1%"),
       awful.key({ modkey, "Control", }, 
                   "Next",   function () awful.util.spawn(script_dir .. "/playback.sh next",false) end, "Skip to next track"),
       awful.key({ modkey, "Control", }, 

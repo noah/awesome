@@ -67,6 +67,7 @@ pacbox      = wibox.widget.textbox()
 wifibox     = wibox.widget.textbox()
 musicbox    = wibox.widget.textbox()
 mdirbox     = wibox.widget.textbox()
+batterybox  = wibox.widget.textbox()
 
 cpugraph    = awful.widget.graph()
 cpugraph:set_width(100)
@@ -139,6 +140,8 @@ for s = 1, screen.count() do
     bot_right_layout:add(delimiter)
     bot_right_layout:add(wifibox)
     bot_right_layout:add(delimiter)
+    bot_right_layout:add(batterybox)
+    bot_right_layout:add(delimiter)
 
     local top_layout = wibox.layout.align.horizontal()
     top_layout:set_left(top_left_layout)
@@ -158,6 +161,7 @@ end
 gnarly.cmus     = require("gnarly.cmus")
 gnarly.mdir     = require("gnarly.mdir")
 gnarly.yaourt   = require("gnarly.yaourt")
+gnarly.battery  = require("gnarly.battery")
 
 -- vicious widgets
 vicious.register(datebox, vicious.widgets.date, "%A %Y-%m-%d %H:%M:%S %Z", 2)
@@ -174,11 +178,11 @@ vicious.register(membox, vicious.widgets.mem,
 -- 
 vicious.register(wifibox,   vicious.widgets.wifi,   "${ssid} ${link}% ${rate} MB/s", 16, "wlp3s0")
 vicious.register(cpugraph, vicious.widgets.cpu, "$1", 3)
-vicious.register(volbox, vicious.contrib.pulse, "vol $1%", 2, "alsa_output.pci-0000_00_1b.0.analog-stereo")
+vicious.register(volbox, vicious.contrib.pulse, "vol $1%", 2, "alsa_output.pci-0000_00_1b.0.hdmi-stereo-extra1")
 volbox:buttons(awful.util.table.join(
     awful.button({ }, 1, function () awful.util.spawn("pavucontrol") end),
-    awful.button({ }, 5, function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_1b.0.analog-stereo") end),
-    awful.button({ }, 4, function () vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_1b.0.analog-stereo") end)
+    awful.button({ }, 5, function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_1b.0.hdmi-stereo-extra1") end),
+    awful.button({ }, 4, function () vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_1b.0.hdmi-stereo-extra1") end)
 ))
 -- 
 vicious.register(musicbox, gnarly.cmus, 
@@ -195,6 +199,12 @@ vicious.register(musicbox, gnarly.cmus,
                               T["{CRS}"]
                           )
     end, 2)
+
+vicious.register(batterybox, gnarly.battery,
+  function(widget, T)
+          return printf("%s: %u%%", T['{status}'], T['{charge}'])
+  end, 11)
+
 -- 
 vicious.register(mdirbox, gnarly.mdir, 
     function(widget, mailboxes)
@@ -218,3 +228,4 @@ vicious.register(pacbox, gnarly.yaourt,
   function(widget, n)
     return n["pacman"] .. " (pacman) " .. n["aur"] .. " (aur)"
   end, 643)
+

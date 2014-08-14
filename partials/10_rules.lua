@@ -25,10 +25,13 @@ awful.rules.rules = {
     { rule = { class = "MPlayer" },                 properties = { floating = false } },
     { rule = { class = "free-jin-JinApplication",
                 instance = "sun-awt-X11-XFramePeer" }, properties = { floating = false } },
+    { rule = { class = "free-jin-JinApplication", instance = "sun-awt-X11-XDialogPeer" }, properties = { floating = true } },
+    { rule = { class = "free-jin-JinApplication", instance = "sun-awt-X11-XFramePeer" }, properties = { floating = false } },
     { rule = { class = "gimp" },                    properties = { floating = true } },
     { rule = { class = "google-chrome"},            properties = { floating = false } },
     { rule = { class = "Google-chrome"},            properties = { floating = false } },
     { rule = { class = "libreoffice-calc" },        properties = { floating = false } },
+    { rule = { instance = "libreoffice" },          properties = { floating = false } },
     { rule = { class = "libreoffice-writer" },      properties = { floating = false } },
     { rule = { class = "mplayer" },                 properties = { floating = false } },
     { rule = { 

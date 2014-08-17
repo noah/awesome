@@ -9,5 +9,7 @@ modkey = "Mod1"
 --
 terminald       = "urxvt"
 terminal        = "urxvtc"
+--terminald       = "uxterm"
+--terminal        = "uxterm"
 editor          = os.getenv("EDITOR") or "vim"
 editor_cmd      = terminal .. " -e " .. editor

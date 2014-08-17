@@ -1,4 +1,8 @@
-
+-- vi-like menu navigation bindings
+--
+awful.menu.menu_keys.up     = { "k" }
+awful.menu.menu_keys.down   = { "j" }
+awful.menu.menu_keys.close  = { "q", "Escape" }
 
 globalkeys = awful.util.table.join(
 
@@ -68,7 +72,7 @@ globalkeys = awful.util.table.join(
                 if #mcs == 1 then
                         mcs[1][2]()   -- raise if only one client minimized
                 else
-                        awful.menu(mcs):show()  -- show the menu
+                        awful.menu(mcs):show()
                 end
         end, "show maximize menu" ),
         awful.key({ modkey, "Control" }, "n", awful.client.restore, "restore client"),
@@ -95,7 +99,7 @@ globalkeys = awful.util.table.join(
     keydoc.group("Program keys"),
       awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end, "open terminal (no daemon)"),
       awful.key({ modkey, "Shift"   }, "Return", function() awful.util.spawn(terminald, false) end, "open terminal (daemon)"),
-      awful.key({ modkey,           }, "e", function() awful.util.spawn("nautilus", false) end, "open file manager GUI"),
+      awful.key({ modkey,           }, "e", function() awful.util.spawn("thunar", false) end, "open file manager GUI"),
 
       -- keybindings
       awful.key({         }, "Scroll_Lock",   function () awful.util.spawn("xscreensaver-command -lock",false)    end),

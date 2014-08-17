@@ -157,7 +157,7 @@ end
 
 gnarly.cmus     = require("gnarly.cmus")
 gnarly.mdir     = require("gnarly.mdir")
-gnarly.yaourt   = require("gnarly.yaourt")
+-- gnarly.yaourt   = require("gnarly.yaourt")
 
 -- vicious widgets
 vicious.register(datebox, vicious.widgets.date, "%A %Y-%m-%d %H:%M:%S %Z", 2)
@@ -214,7 +214,7 @@ vicious.register(mdirbox, gnarly.mdir,
     end, 1, "/home/noah*/mail/noah*@*.com")
 -- 
 -- 
-vicious.register(pacbox, gnarly.yaourt,
-  function(widget, n)
-    return n["pacman"] .. " (pacman) " .. n["aur"] .. " (aur)"
-  end, 643)
+-- vicious.register(pacbox, gnarly.yaourt,
+--   function(widget, n)
+--     return n["pacman"] .. " (pacman) " .. n["aur"] .. " (aur)"
+--   end, 643)

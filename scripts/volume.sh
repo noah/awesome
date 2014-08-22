@@ -15,12 +15,15 @@ if [[ -n $have_pulse ]]; then
   # The following convoluted ugliness brought to you courtesy of the
   # creators of pulseaudio.
 
+  first_sink="$(pacmd list-sinks |grep index|head -n 1 |cut -d":" -f 2 |tr -d ' ')"
+
   # current volume in hex, strip '0x' prefix
   vol_max=65536
-  vol_dec=$(echo "ibase=16; $(pacmd dump|grep set-sink-volume|cut -d' ' -f 3|sed -e 's:^0x::'|tr '[a-f]' '[A-F]')"|bc|head -1)
+  vol_h="$(pacmd dump|grep set-sink-volume|cut -d' ' -f 3|head -n1|sed -e 's:^0x::'|tr '[a-f]' '[A-F]')"
+  vol_d=$(echo "ibase=16; $vol_h"|bc|head -1)
 
   # need fp division
-  vol_pct=$(echo "scale=2;($vol_dec/$vol_max.0)*100" | bc)
+  vol_pct=$(echo "scale=2;($vol_d/$vol_max.0)*100" | bc)
 
   if [[ $# -ne 1 ]]; then
     # print the volume level and die
@@ -34,7 +37,7 @@ if [[ -n $have_pulse ]]; then
   # amixer -Dpulse -q -c 0 set Master 1$1
   # So, this is not the right way to do it anymore. (F*CKing pulseaudio)
   increment=1000 # this corresponds to a roughly 2% increase in volume
-  dec_new_vol="$(echo "$vol_dec$1$increment"|bc)"
+  vol_d_new="$(echo "$vol_d$1$increment"|bc)"
   #
   # ...
   #
@@ -48,12 +51,12 @@ if [[ -n $have_pulse ]]; then
   # 
   # Fact:  PulseAudio was designed by monkeys.
   # 
-  if [[ $dec_new_vol -gt $vol_max ]]; then
-    dec_new_vol="$vol_max"
+  if [[ $vol_d_new -gt $vol_max ]]; then
+    vol_d_new="$vol_max"
   fi
-  hex_new_vol="$(echo "ibase=10; obase=16; $dec_new_vol"|bc)"
-  pacmd set-sink-volume 0 "0x$hex_new_vol" > /dev/null
-  #        the sink idx ^ is still hard-coded here ...
+
+  vol_h_new="$(echo "ibase=10; obase=16; $vol_d_new"|bc)"
+  pacmd set-sink-volume "$first_sink" "0x$vol_h_new"
 else
   echo -n "0% (no pulse)"
 fi

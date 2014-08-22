@@ -177,13 +177,16 @@ vicious.register(membox, vicious.widgets.mem,
         return printf("mem %d%% (%d/%d GB)", args[1], args[2]/1024.0, args[3]/1024.0)
     end, 13)
 -- 
+
+local first_pulse_sink = tonumber( awful.util.pread("pacmd list-sinks |grep index|head -n 1 |cut -d':' -f 2 |tr -d ' '") )
+
 vicious.register(wifibox,   vicious.widgets.wifi,   "${ssid} ${link}% ${rate} MB/s", 16, "wlp3s0")
 vicious.register(cpugraph, vicious.widgets.cpu, "$1", 3)
-vicious.register(volbox, vicious.contrib.pulse, "vol $1%", 2, "alsa_output.pci-0000_00_1b.0.hdmi-stereo-extra1")
+vicious.register(volbox, vicious.contrib.pulse, "vol $1%", 2, first_pulse_sink)
 volbox:buttons(awful.util.table.join(
     awful.button({ }, 1, function () awful.util.spawn("pavucontrol") end),
-    awful.button({ }, 5, function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_1b.0.hdmi-stereo-extra1") end),
-    awful.button({ }, 4, function () vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_1b.0.hdmi-stereo-extra1") end)
+    awful.button({ }, 5, function () vicious.contrib.pulse.add(5, first_pulse_sink) end),
+    awful.button({ }, 4, function () vicious.contrib.pulse.add(-5, first_pulse_sink) end)
 ))
 -- 
 vicious.register(musicbox, gnarly.cmus, 

@@ -1,21 +1,56 @@
 -- {{{ Tags
--- get tag names from file
 --
-local initial_tags = {}
-for line in io.lines(table.concat({config_dir, "tags.txt"}, "/")) do
-  table.insert(initial_tags, line)
+
+-- get tag names from file
+-- TODO only 12 keys will be used for tags (keyboard order).  let's make that
+-- explicit
+-- mytags = mytags[1:12] no table.slice builtin lua wtf
+local tagslist = {}
+for tag in io.lines(table.concat({config_dir, "tags.txt"}, "/")) do
+        table.insert(tagslist, tag)
 end
--- 
--- -- number the tag names
-for T = 1, #initial_tags do
-  initial_tags[T] = (T .. " " .. initial_tags[T])
+
+
+-- index tags in top-row natural keyboard order [1,2,3,...,0,'-',='].
+-- this indexing corresponds to the alt+-prefixed keybindings they
+-- receive elsewhere.  this gives a pretty good reasonable total of 12
+-- tags per screen, and extends the number of available tags beyond the
+-- awesome default of 9.
+--
+local mytags    = {}
+local i         = 1
+for key, keycode in pairs(top_row_keycodes) do
+        mytags[i] = "  " .. tagslist[i] .. " "
+        i = i+1
 end
--- -- Define a tag table which hold all screen tags.
+
+
+-- Define a tag table which hold all screen tags.
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag(initial_tags, s, layouts[1]) 
+    tags[s] = awful.tag(mytags, s, layouts[1]) 
 end
+
+keycodes_to_tags = {}
+local i=1
+for key, keycode in pairs(top_row_keycodes) do
+        keycodes_to_tags[keycode] = tags[1][i]
+        i=i+1
+end
+
+function countTableSize(table)
+    local n = 0
+    for k, v in pairs(table) do
+        n = n + 1
+    end
+    return n
+end
+
+
+--log(countTableSize(top_row_keycodes))
+--log(countTableSize(mytags))
+--log(countTableSize(tags[1]))
 -- }}}
 --
 

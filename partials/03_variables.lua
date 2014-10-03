@@ -6,6 +6,23 @@
 -- modkey = "Mod4"
 modkey = "Mod1"
 
+-- the format is "#keycode".  the '#' prefix is an awesome-specific
+-- convention.  use xev(1) to find keycodes.
+top_row_keycodes = {
+        [1]     = "#" .. ( 1 + 9 ),
+        [2]     = "#" .. ( 2 + 9 ),
+        [3]     = "#" .. ( 3 + 9 ),
+        [4]     = "#" .. ( 4 + 9 ),
+        [5]     = "#" .. ( 5 + 9 ),
+        [6]     = "#" .. ( 6 + 9 ),
+        [7]     = "#" .. ( 7 + 9 ),
+        [8]     = "#" .. ( 8 + 9 ),
+        [9]     = "#" .. ( 9 + 9 ),
+        [0]     = "#" .. ( 10 + 9 ),
+        ["-"]   = "#" .. ( 11 + 9 ),
+        ["="]   = "#" .. ( 12 + 9 ) 
+}
+
 --
 terminald       = "urxvt"
 terminal        = "urxvtc"

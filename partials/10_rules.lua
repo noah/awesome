@@ -34,6 +34,7 @@ awful.rules.rules = {
     { rule = { instance = "libreoffice" },          properties = { floating = false } },
     { rule = { class = "libreoffice-writer" },      properties = { floating = false } },
     { rule = { class = "mplayer" },                 properties = { floating = false } },
+    { rule = { class = "Gtkpod", instance="gtkpod" },                 properties = { floating = false } },
     { rule = { 
       class = "Nautilus",
       instance="nautilus" },

@@ -201,18 +201,24 @@ globalkeys = awful.util.table.join(
 --                       end
 --                   end))
 -- end
-
--- Bind all key numbers to tags.
 --
-for key, keycode in pairs(top_row_keycodes) do
-    globalkeys = awful.util.table.join(globalkeys,
+
+function to_awesome_keycode( i )
+    -- use xev(1) to find keycodes.  the format here is "#keycode".  the '#'
+    -- prefix is an awesome-specific convention. 
+    return '#' .. i + 9
+end
+
+-- Bind keycodes to tags.
+--
+for i=1, TAGS_MAX do
+    keycode     = to_awesome_keycode( i )
+    globalkeys  = awful.util.table.join(globalkeys,
         awful.key({ modkey }, keycode,
                   function ()
-                        local tag       = keycodes_to_tags[keycode]
-                        log(tag.name)
-                        local screen    = mouse.screen
-                        if tags[screen][tag] then
-                           awful.tag.viewonly(tags[screen][tag])
+                        local screen = mouse.screen
+                        if tags[screen][i] then
+                           awful.tag.viewonly(tags[screen][i])
                         end
                   end),
         awful.key({ modkey, "Control" }, keycode,

@@ -9,7 +9,6 @@
 -- default of 9 (1 ... 9).  Tags can have arbitrary names, one per line,
 -- in TAGS_FILE.
 --
-TAGS_MAX    = 12
 TAGS_FILE   = table.concat({config_dir, "tags.txt"}, "/")
 
 
@@ -19,6 +18,9 @@ for tag in io.lines( TAGS_FILE ) do
         table.insert(tagslist, tag)
 end
 
+-- allow for fewer than 12 tags
+TAGS_MAX    = math.min(12, #tagslist)
+
 -- sanity check
 if #tagslist > TAGS_MAX then
         log("warn: " .. TAGS_MAX .. " tags max, " 
@@ -26,7 +28,7 @@ if #tagslist > TAGS_MAX then
                 .. " will be ignored")
 end
 
--- take first TAGS_MAX, ignore remainder
+-- take first #tagslist, ignore remainder if any
 mytags = {}
 for i=1, TAGS_MAX do
         mytags[i] = "  " .. tagslist[i] .. " "

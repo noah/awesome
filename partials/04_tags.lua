@@ -31,7 +31,7 @@ end
 -- take first #tagslist, ignore remainder if any
 mytags = {}
 for i=1, TAGS_MAX do
-        mytags[i] = "  " .. tagslist[i] .. " "
+        mytags[i] = tagslist[i]
 end
 
 -- create a tag table per screen

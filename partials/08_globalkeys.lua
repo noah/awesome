@@ -168,33 +168,73 @@ globalkeys = awful.util.table.join(
     -- end)
 )
 
--- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it works on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
--- for i = 1, keynumber do
-for i = 1, 9 do
-    globalkeys = awful.util.table.join(globalkeys,
-        awful.key({ modkey }, "#" .. i + 9,
+-- -- Bind all key numbers to tags.
+-- -- Be careful: we use keycodes to make it works on any keyboard layout.
+-- -- This should map on the top row of your keyboard, usually 1 to 9.
+-- -- for i = 1, keynumber do
+-- for i = 1, 9 do
+--     globalkeys = awful.util.table.join(globalkeys,
+--         awful.key({ modkey }, "#" .. i + 9,
+--                   function ()
+--                         local screen = mouse.screen
+--                         if tags[screen][i] then
+--                            awful.tag.viewonly(tags[screen][i])
+--                         end
+--                   end),
+--         awful.key({ modkey, "Control" }, "#" .. i + 9,
+--                   function ()
+--                       local screen = mouse.screen
+--                       if tags[screen][i] then
+--                           awful.tag.viewtoggle(tags[screen][i])
+--                       end
+--                   end),
+--         awful.key({ modkey, "Shift" }, "#" .. i + 9,
+--                   function ()
+--                       if client.focus and tags[client.focus.screen][i] then
+--                           awful.client.movetotag(tags[client.focus.screen][i])
+--                       end
+--                   end),
+--         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+--                   function ()
+--                       if client.focus and tags[client.focus.screen][i] then
+--                           awful.client.toggletag(tags[client.focus.screen][i])
+--                       end
+--                   end))
+-- end
+--
+
+function to_awesome_keycode( i )
+    -- use xev(1) to find keycodes.  the format here is "#keycode".  the '#'
+    -- prefix is an awesome-specific convention. 
+    return '#' .. i + 9
+end
+
+-- Bind keycodes to tags.
+--
+for i=1, TAGS_MAX do
+    keycode     = to_awesome_keycode( i )
+    globalkeys  = awful.util.table.join(globalkeys,
+        awful.key({ modkey }, keycode,
                   function ()
                         local screen = mouse.screen
                         if tags[screen][i] then
                            awful.tag.viewonly(tags[screen][i])
                         end
                   end),
-        awful.key({ modkey, "Control" }, "#" .. i + 9,
+        awful.key({ modkey, "Control" }, keycode,
                   function ()
                       local screen = mouse.screen
                       if tags[screen][i] then
                           awful.tag.viewtoggle(tags[screen][i])
                       end
                   end),
-        awful.key({ modkey, "Shift" }, "#" .. i + 9,
+        awful.key({ modkey, "Shift" }, keycode,
                   function ()
                       if client.focus and tags[client.focus.screen][i] then
                           awful.client.movetotag(tags[client.focus.screen][i])
                       end
                   end),
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+        awful.key({ modkey, "Control", "Shift" }, keycode,
                   function ()
                       if client.focus and tags[client.focus.screen][i] then
                           awful.client.toggletag(tags[client.focus.screen][i])

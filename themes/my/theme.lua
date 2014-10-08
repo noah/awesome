@@ -3,28 +3,32 @@
 ---------------------------
 
 theme = {}
-theme.font          = "Monaco 9"
+theme.font          = "Monaco 11"
+
 
 -- You can use your own command to set your wallpaper
 -- theme.wallpaper     = "~/background"
-
+--
 
 --wallpaper_cmd = "feh --bg-fill ~/background"
 
-theme.bg_normal     = "#121212"
-theme.bg_focus      = "#dfff00"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
+theme.fg_normal     = "#000000"
+theme.bg_normal     = "#ffffff"
 
-theme.fg_normal     = "#ffffff"
-theme.fg_focus      = "green"
+theme.fg_focus      = "#ffffff"
+theme.bg_focus      = "#332f30"
+
 theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.bg_urgent     = "#ff0000"
+
+theme.fg_minimize   = "#cccccc"
+theme.bg_minimize   = "#7f7f7f"
 
 theme.border_width  = "1"
 theme.border_normal = "#000000"
 theme.border_focus  = "#ffff00"
-theme.border_marked = "#91231c"
+
+theme.border_marked = "#ff0000"
 
 -- There are another variables sets
 -- overriding the default one when
@@ -83,18 +87,20 @@ theme.titlebar_maximized_button_normal_active = "~/.config/awesome/themes/defaul
 theme.titlebar_maximized_button_focus_active = "~/.config/awesome/themes/default/titlebar/maximized_focus_active.png"
 
 -- You can use your own layout icons like this:
-theme.layout_fairh = "~/.config/awesome/themes/default/layouts/fairhw.png"
-theme.layout_fairv = "~/.config/awesome/themes/default/layouts/fairvw.png"
-theme.layout_floating = "~/.config/awesome/themes/default/layouts/floatingw.png"
-theme.layout_magnifier = "~/.config/awesome/themes/default/layouts/magnifierw.png"
-theme.layout_max = "~/.config/awesome/themes/default/layouts/maxw.png"
-theme.layout_fullscreen = "~/.config/awesome/themes/default/layouts/fullscreenw.png"
-theme.layout_tilebottom = "~/.config/awesome/themes/default/layouts/tilebottomw.png"
-theme.layout_tileleft = "~/.config/awesome/themes/default/layouts/tileleftw.png"
-theme.layout_tile = "~/.config/awesome/themes/default/layouts/tilew.png"
-theme.layout_tiletop = "~/.config/awesome/themes/default/layouts/tiletopw.png"
+theme.layout_fairh = "~/.config/awesome/themes/default/layouts/fairh.png"
+theme.layout_fairv = "~/.config/awesome/themes/default/layouts/fairv.png"
+theme.layout_floating = "~/.config/awesome/themes/default/layouts/floating.png"
+theme.layout_magnifier = "~/.config/awesome/themes/default/layouts/magnifier.png"
+theme.layout_max = "~/.config/awesome/themes/default/layouts/max.png"
+theme.layout_fullscreen = "~/.config/awesome/themes/default/layouts/fullscreen.png"
+theme.layout_tilebottom = "~/.config/awesome/themes/default/layouts/tilebottom.png"
+theme.layout_tileleft = "~/.config/awesome/themes/default/layouts/tileleft.png"
+theme.layout_tile = "~/.config/awesome/themes/default/layouts/tile.png"
+theme.layout_tiletop = "~/.config/awesome/themes/default/layouts/tiletop.png"
 
-theme.awesome_icon = "~/.config/awesome/themes/my/awesome-icon.png"
+--theme.awesome_icon = "~/.config/awesome/themes/my/awesome-icon.png"
+
+
 
 return theme
 -- vim: filetype=lua

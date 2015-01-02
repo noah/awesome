@@ -39,8 +39,7 @@ awful.rules.rules = {
       class = "Nautilus",
       instance="nautilus" },
       properties = { 
-        floating = true,
-        sticky = true
+        floating = false,
       } 
     },
     { rule = { class = "pinentry" },                properties = { floating = true } },

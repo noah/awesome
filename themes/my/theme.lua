@@ -3,7 +3,7 @@
 ---------------------------
 
 theme = {}
-theme.font          = "Monaco 11"
+theme.font          = "Monaco 10"
 
 
 -- You can use your own command to set your wallpaper
@@ -24,11 +24,11 @@ theme.bg_urgent     = "#ff0000"
 theme.fg_minimize   = "#cccccc"
 theme.bg_minimize   = "#7f7f7f"
 
-theme.border_width  = "1"
+theme.border_width  = "0"
 theme.border_normal = "#000000"
-theme.border_focus  = "#ffff00"
+theme.border_focus  = "#535d6c"
+theme.border_marked = "#91231c"
 
-theme.border_marked = "#ff0000"
 
 -- There are another variables sets
 -- overriding the default one when

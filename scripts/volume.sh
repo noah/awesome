@@ -1,8 +1,8 @@
 #!/bin/sh
 
 
-# Adjust desktop PCM and squeezebox system volume
-# this is intended to be an awesome keyboard shortcut callback
+# Print and optionall adjust pulse audio active sink volume.  This is
+# intended to be an awesome keyboard shortcut callback
 #
 # Usage:
 #   ./volume.sh [+|-]
@@ -15,30 +15,34 @@ if [[ -n $have_pulse ]]; then
   # The following convoluted ugliness brought to you courtesy of the
   # creators of pulseaudio.
 
-  first_sink="$(pacmd list-sinks |grep index|head -n 1 |cut -d":" -f 2 |tr -d ' ')"
+  active_sink="$(pacmd list-sinks | \
+          # the "active" sink is denoted by an asterisk prefix
+          grep '* index:' | \
+          # the sink number is the 5th column
+          cut -d' ' -f 5)"
 
-  # current volume in hex, strip '0x' prefix
-  vol_max=65536
-  vol_h="$(pacmd dump|grep set-sink-volume|cut -d' ' -f 3|head -n1|sed -e 's:^0x::'|tr '[a-f]' '[A-F]')"
-  vol_d=$(echo "ibase=16; $vol_h"|bc|head -1)
-
-  # need fp division
-  vol_pct=$(echo "scale=2;($vol_d/$vol_max.0)*100" | bc)
+  # current volume
+  vol_pct=$(pacmd list-sinks | \
+          # print 15 lines after the active sink
+          grep -A 15 "index: $active_sink" | \
+          # pull out the volume: row
+          egrep '^[[:space:]]+volume:.+' | \
+          # extract the numeric volume
+          egrep -o '[[:digit:]]+%' | \
+          # take the first (there may be multiple due to multiple [left/right] channels)
+          tail -n 1 | \
+          # strip off the percent sign
+          tr -d '%')
 
   if [[ $# -ne 1 ]]; then
     # print the volume level and die
-    #echo -n "$(cut -d '[' -f 2 <<<"$(amixer get Master | tail -n 1)" | sed 's/%.*//g')%"
-    # strip fp
-    echo -n "$vol_pct" | sed 's:\.[[:digit:]]*::'
+    echo -n "$vol_pct"
     exit 0
   fi
 
   # plugging in a webcam might break this line
   # amixer -Dpulse -q -c 0 set Master 1$1
   # So, this is not the right way to do it anymore. (F*CKing pulseaudio)
-  increment=1000 # this corresponds to a roughly 2% increase in volume
-  vol_d_new="$(echo "$vol_d$1$increment"|bc)"
-  #
   # ...
   #
   #
@@ -51,31 +55,17 @@ if [[ -n $have_pulse ]]; then
   # 
   # Fact:  PulseAudio was designed by monkeys.
   # 
-  if [[ $vol_d_new -gt $vol_max ]]; then
-    vol_d_new="$vol_max"
-  fi
+  #
+  operator=$1
+  vol_inc="1"
+  vol_pct_min=0
+  vol_pct_max=100
+  vol_pct_new="$(echo "ibase=10;obase=10; $vol_pct$operator$vol_inc"|bc)"
 
-  vol_h_new="$(echo "ibase=10; obase=16; $vol_d_new"|bc)"
-  pacmd set-sink-volume "$first_sink" "0x$vol_h_new"
+  test $vol_pct_new -gt $vol_pct_max && vol_pct_new=$vol_pct_max
+  test $vol_pct_new -lt $vol_pct_min && vol_pct_new=$vol_pct_min
+
+  pactl set-sink-volume $active_sink -- "${vol_pct_new}%"
 else
   echo -n "0% (no pulse)"
 fi
-
-###
-# Squeezebox
-# yes, I am lazy
-# scriptable consumer electronics are sooooooooooooooooooo rad
-# http://7be:9000/html/docs/cli-api.html?player=#mixer%20volume
-
-# HOST=localhost
-# PORT=9090
-# VOL_STEP=5
-# player_id="00:04:20:12:97:e5"
-# 
-# # Don't send commands to the squeezebox in the middle of the night,
-# # people might be sleeping
-# #
-# HOUR=$(date +"%H")
-# if [[ $HOUR -gt 07 && $HOUR -lt 02 ]]; then
-#   (echo "$player_id mixer volume $1${VOL_STEP}"; sleep 1)|telnet $HOST $PORT
-# fi

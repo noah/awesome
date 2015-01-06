@@ -21,18 +21,45 @@ awful.rules.rules = {
                         keys = clientkeys,
                         buttons = clientbuttons } },
     -- { rule = { class = "xboard" },      properties = { floating = true } },
-    { rule = { class = "Chromium" },                properties = { floating = false } },
-    { rule = { class = "MPlayer" },                 properties = { floating = false } },
-    { rule = { class = "free-jin-JinApplication", instance = "sun-awt-X11-XDialogPeer" }, properties = { floating = true } },
-    { rule = { class = "free-jin-JinApplication", instance = "sun-awt-X11-XFramePeer" }, properties = { floating = false } },
+    { rule = { class = "Thunderbird", instance="Mail" },
+            properties = { 
+                    tag = tags[1][7]
+            } },
+    { rule = { class = "Chromium" },                
+            properties = { 
+                    floating = false,
+                    tag = tags[1][2]
+            } },
+    { rule = { class = "google-chrome"},            properties = { 
+            floating = false,
+            tag = tags[1][2]
+    } },
+    { rule = { class = "Google-chrome"},            properties = { 
+            floating = false,
+            tag = tags[1][2]
+    } },
+    { rule = { class = "Firefox", instance="Navigator" },                
+            properties = { 
+                    floating = false,
+                    tag = tags[1][2]
+            } },
+    { rule = { class = "free-jin-JinApplication", instance = "sun-awt-X11-XDialogPeer" }, 
+            properties = { 
+                    floating = true,
+                    tag = tags[1][5]
+            } },
+    { rule = { class = "free-jin-JinApplication", instance = "sun-awt-X11-XFramePeer" }, 
+            properties = { 
+                    floating = false,
+                    tag = tags[1][5]
+            } },
     { rule = { class = "Plugin-container", instance = "plugin-container" },                    properties = { floating = true } },
     { rule = { class = "gimp" },                    properties = { floating = true } },
-    { rule = { class = "google-chrome"},            properties = { floating = false } },
-    { rule = { class = "Google-chrome"},            properties = { floating = false } },
     { rule = { class = "libreoffice-calc" },        properties = { floating = false } },
     { rule = { instance = "libreoffice" },          properties = { floating = false } },
     { rule = { class = "libreoffice-writer" },      properties = { floating = false } },
     { rule = { class = "mplayer" },                 properties = { floating = false } },
+    { rule = { class = "MPlayer" },                 properties = { floating = false } },
     { rule = { class = "Gtkpod", instance="gtkpod" },                 properties = { floating = false } },
     { rule = { 
       class = "Nautilus",

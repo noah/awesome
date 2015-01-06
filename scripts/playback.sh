@@ -33,8 +33,8 @@ if [[ $? -eq 0 ]]; then
   fi
 else
   # scriptable consumer electronics are sooooooooooooooooooo rad
-  # http://7be:9000/html/docs/cli-api.html?player=#mixer%20volume
-  HOST=7be
+  # http://ark:9000/html/docs/cli-api.html?player=#mixer%20volume
+  HOST=ark
   PORT=9090
   player_id="00:04:20:12:97:e5"
 

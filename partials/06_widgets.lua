@@ -178,8 +178,8 @@ vicious.register(membox, vicious.widgets.mem,
     end, 13)
 -- 
 
-local active_sink = tonumber( awful.util.pread("pacmd list-sinks | grep '* index' -A 20|grep name| cut -d\\< -f2 | cut -d\\> -f1"))
-
+local active_sink = tonumber( 
+        awful.util.pread("pacmd list-sinks | grep '* index' -A 20|grep -Po '(?<=\tname: <).*(?=>)'") )
 
 vicious.register(wifibox,   vicious.widgets.wifi,   "${ssid} ${link}% ${rate} MB/s", 16, "wlp3s0")
 vicious.register(cpugraph, vicious.widgets.cpu, "$1", 3)

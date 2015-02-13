@@ -102,7 +102,7 @@ globalkeys = awful.util.table.join(
       awful.key({ modkey,           }, "e", function() awful.util.spawn("thunar", false) end, "open file manager GUI"),
 
       -- keybindings
-      awful.key({         }, "Scroll_Lock",   function () awful.util.spawn("xscreensaver-command -lock",false)    end),
+      awful.key({         }, "Scroll_Lock",   function () awful.util.spawn("killall ssh; xscreensaver-command -lock",false)    end),
       awful.key({         }, "Print",         function () awful.util.spawn("gnome-screenshot -a -i", false)end),
       awful.key({ "Shift" }, "Print",         function () awful.util.spawn("gnome-screenshot -w", false)end),
 

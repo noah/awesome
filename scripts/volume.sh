@@ -65,7 +65,7 @@ if [[ -n $have_pulse ]]; then
   test $vol_pct_new -gt $vol_pct_max && vol_pct_new=$vol_pct_max
   test $vol_pct_new -lt $vol_pct_min && vol_pct_new=$vol_pct_min
 
-  pactl set-sink-volume $active_sink -- "${vol_pct_new}%"
+  pactl set-sink-volume $active_sink "${vol_pct_new}%"
 else
   echo -n "0% (no pulse)"
 fi

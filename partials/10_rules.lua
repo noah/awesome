@@ -40,8 +40,8 @@ awful.rules.rules = {
     } },
     { rule = { class = "Firefox", instance="Navigator" },                
             properties = { 
-                    floating = false,
-                    tag = tags[1][2]
+                    floating = false
+                    -- tag = tags[1][2]
             } },
     { rule = { class = "free-jin-JinApplication", instance = "sun-awt-X11-XDialogPeer" }, 
             properties = { 

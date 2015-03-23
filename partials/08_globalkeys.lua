@@ -20,13 +20,25 @@ globalkeys = awful.util.table.join(
     keydoc.group("Client navigation / movement"),
       -- navigation
         awful.key({ modkey,           }, "j", function ()
-                awful.client.focus.byidx( 1)
+                -- awful.client.focus.byidx( 1)
+                awful.client.focus.bydirection("down")
                 if client.focus then client.focus:raise() end
         end, "go to tag below"),
         awful.key({ modkey,           }, "k", function ()
-                awful.client.focus.byidx(-1)
+                -- awful.client.focus.byidx(-1)
+                awful.client.focus.bydirection("up")
                 if client.focus then client.focus:raise() end
-        end, "go to tag above"),
+        end, "go to tag up"),
+        awful.key({ modkey,           }, "l", function ()
+                -- awful.client.focus.byidx(-1)
+                awful.client.focus.bydirection("right")
+                if client.focus then client.focus:raise() end
+        end, "go to tag right"),
+        awful.key({ modkey,           }, "h", function ()
+                -- awful.client.focus.byidx(-1)
+                awful.client.focus.bydirection("left")
+                if client.focus then client.focus:raise() end
+        end, "go to tag left"),
         awful.key({ modkey,           }, "u", awful.client.urgent.jumpto, "focus urgent client"),
         awful.key({ modkey,           }, "Tab",
             function ()

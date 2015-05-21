@@ -174,7 +174,7 @@ vicious.register(uptimebox, vicious.widgets.uptime,
 -- 
 vicious.register(membox, vicious.widgets.mem,    
     function(widget, args)
-        return printf("mem %d%% (%d/%d GB)", args[1], args[2]/1024.0, args[3]/1024.0)
+        return printf("mem %d%% (%d/%d GB)", args[1], math.floor(args[2]/1024.0), math.floor(args[3]/1024.0))
     end, 13)
 -- 
 

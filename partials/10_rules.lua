@@ -38,7 +38,20 @@ awful.rules.rules = {
             floating = false,
             tag = tags[1][2]
     } },
+    { rule = { class = "xfreerdp", instance="xfreerdp" },                
+            properties = { 
+                    floating = false
+                    -- tag = tags[1][2]
+            } },
     { rule = { class = "Firefox", instance="Navigator" },                
+            properties = { 
+                    floating = false
+                    -- tag = tags[1][2]
+            } },
+
+    { rule = { 
+            -- Firefox file selection dialog (e.g.)
+            class = "Firefox", instance="firefox" },                
             properties = { 
                     floating = false
                     -- tag = tags[1][2]
@@ -60,10 +73,18 @@ awful.rules.rules = {
     { rule = { class = "libreoffice-writer" },      properties = { floating = false } },
     { rule = { class = "mplayer" },                 properties = { floating = false } },
     { rule = { class = "MPlayer" },                 properties = { floating = false } },
-    { rule = { class = "Gtkpod", instance="gtkpod" },                 properties = { floating = false } },
+    { rule = { instance="gtkpod" },                 properties = { floating = false } },
     { rule = { 
       class = "Nautilus",
       instance="nautilus" },
+      properties = { 
+        floating = false,
+        sticky = false
+      } 
+    },
+    { rule = { 
+      class = "rdesktop",
+      instance="rdesktop" },
       properties = { 
         floating = false,
         sticky = false

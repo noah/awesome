@@ -2,6 +2,9 @@ local wibox     = require("wibox")
 local vicious   = require("vicious")
 vicious.contrib = require("vicious.contrib")
 
+gnarly = require("gnarly")
+local log = gnarly.util.log
+
 -- {{{ Wibox
 -- Create widgets
 -- mytextclock = awful.widget.textclock()
@@ -215,7 +218,7 @@ vicious.register(batterybox, gnarly.battery,
 -- 
 vicious.register(mdirbox, gnarly.mdir, 
     function(widget, mailboxes)
-
+      log(mailboxes)
       _t    = {}
       count = 0
       for k, v in pairs(mailboxes) do
@@ -228,7 +231,7 @@ vicious.register(mdirbox, gnarly.mdir,
         return "✓"
       end
 
-    end, 1, "/home/noah*/mail/noah*@*.com")
+    end, 1, "/home/noah*/mail/noah@*.com")
 -- 
 -- 
 -- vicious.register(pacbox, gnarly.yaourt,

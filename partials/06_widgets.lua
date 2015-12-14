@@ -218,7 +218,6 @@ vicious.register(batterybox, gnarly.battery,
 -- 
 vicious.register(mdirbox, gnarly.mdir, 
     function(widget, mailboxes)
-      log(mailboxes)
       _t    = {}
       count = 0
       for k, v in pairs(mailboxes) do

@@ -56,6 +56,11 @@ awful.rules.rules = {
                     floating = false
                     -- tag = tags[1][2]
             } },
+    { rule = { 
+            class = "Pidgin", instance="Pidgin" },
+            properties = {
+                    floating = false
+            } },
     { rule = { class = "free-jin-JinApplication", instance = "sun-awt-X11-XDialogPeer" }, 
             properties = { 
                     floating = true,

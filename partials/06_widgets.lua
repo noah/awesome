@@ -164,7 +164,7 @@ end
 gnarly.cmus     = require("gnarly.cmus")
 gnarly.mdir     = require("gnarly.mdir")
 -- gnarly.yaourt   = require("gnarly.yaourt")
-gnarly.yaourt   = require("gnarly.yaourt")
+-- gnarly.yaourt   = require("gnarly.yaourt")
 gnarly.battery  = require("gnarly.battery")
 
 -- vicious widgets
@@ -237,7 +237,7 @@ vicious.register(mdirbox, gnarly.mdir,
 --   function(widget, n)
 --     return n["pacman"] .. " (pacman) " .. n["aur"] .. " (aur)"
 --   end, 643)
-vicious.register(pacbox, gnarly.yaourt,
-  function(widget, n)
-    return n["pacman"] .. " (pacman) " .. n["aur"] .. " (aur)"
-  end, 643)
+-- vicious.register(pacbox, gnarly.yaourt,
+--   function(widget, n)
+--     return n["pacman"] .. " (pacman) " .. n["aur"] .. " (aur)"
+--   end, 643)

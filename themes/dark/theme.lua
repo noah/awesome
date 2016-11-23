@@ -12,14 +12,16 @@ theme.font          = "Monaco 10"
 
 --wallpaper_cmd = "feh --bg-fill ~/background"
 
-theme.fg_normal     = "#dddddd"
-theme.fg_focus      = "#000000"
-theme.fg_urgent     = "#332f30"
-theme.fg_minimize   = "#cccccc"
+theme.fg_normal     = "#000000"
+theme.bg_normal     = "#ffffff"
 
-theme.bg_normal     = "#00000e"
-theme.bg_focus      = "#eeeeee"
+theme.fg_focus      = "#ffffff"
+theme.bg_focus      = "#332f30"
+
+theme.fg_urgent     = "#ffffff"
 theme.bg_urgent     = "#ff0000"
+
+theme.fg_minimize   = "#cccccc"
 theme.bg_minimize   = "#7f7f7f"
 
 theme.border_width  = "0"

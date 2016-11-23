@@ -59,5 +59,6 @@ script_dir          = join({config_dir, "scripts"}, "/")
 local partials_dir  = join({config_dir, "partials"}, "/")
 local partials      = scandir(partials_dir)
 for i = 1, #partials do
+  -- log(partials[i])
   dofile(join({partials_dir, partials[i]}, "/"))
 end

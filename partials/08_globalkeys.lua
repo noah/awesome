@@ -115,8 +115,15 @@ globalkeys = awful.util.table.join(
 
       -- keybindings
       awful.key({         }, "Scroll_Lock",   function () awful.util.spawn("killall ssh; xscreensaver-command -lock",false)    end),
-      awful.key({         }, "Print",         function () awful.util.spawn("gnome-screenshot -a -i", false)end),
-      awful.key({ "Shift" }, "Print",         function () awful.util.spawn("gnome-screenshot -w", false)end),
+      awful.key({         }, "Print",         function () 
+                                                        local _fn="/home/noah/screenshot_" .. os.date("%Y-%m-%d_%H:%M:%S") .. ".png"
+                                                        -- n.b.: must be
+                                                        -- os.execute so
+                                                        -- it will block
+                                                        os.execute("maim -s " .. _fn, false)
+                                                        awful.util.spawn("gvfs-open " .. _fn, false)
+                                                end),
+      awful.key({ "Shift" }, "Print",         function () awful.util.spawn("maim -i $(xdotool getactivewindow)", false)end),
 
     -- winamp-stylez
     -- volume

@@ -1,1 +1,1 @@
-my/theme.lua
+light/theme.lua

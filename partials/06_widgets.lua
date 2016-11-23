@@ -164,7 +164,7 @@ end
 gnarly.cmus     = require("gnarly.cmus")
 gnarly.mdir     = require("gnarly.mdir")
 -- gnarly.yaourt   = require("gnarly.yaourt")
-gnarly.yaourt   = require("gnarly.yaourt")
+-- gnarly.yaourt   = require("gnarly.yaourt")
 gnarly.battery  = require("gnarly.battery")
 
 -- vicious widgets
@@ -221,7 +221,7 @@ vicious.register(mdirbox, gnarly.mdir,
       _t    = {}
       count = 0
       for k, v in pairs(mailboxes) do
-        table.insert(_t, "{" .. k .. " => " .. v .. "}")
+        table.insert(_t, "{" .. k .. "→ " .. v .. "}")
         count = count + 1
       end
       if count > 0 then
@@ -230,14 +230,14 @@ vicious.register(mdirbox, gnarly.mdir,
         return "✓"
       end
 
-    end, 1, "/home/noah*/mail/noah@*.com")
+    end, 1, "/home/noah/mail")
 -- 
 -- 
 -- vicious.register(pacbox, gnarly.yaourt,
 --   function(widget, n)
 --     return n["pacman"] .. " (pacman) " .. n["aur"] .. " (aur)"
 --   end, 643)
-vicious.register(pacbox, gnarly.yaourt,
-  function(widget, n)
-    return n["pacman"] .. " (pacman) " .. n["aur"] .. " (aur)"
-  end, 643)
+-- vicious.register(pacbox, gnarly.yaourt,
+--   function(widget, n)
+--     return n["pacman"] .. " (pacman) " .. n["aur"] .. " (aur)"
+--   end, 643)

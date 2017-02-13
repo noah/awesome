@@ -225,22 +225,22 @@ globalkeys = awful.util.table.join(
 
 -- tag functions
 local function show_tag(i)
-        local screen = mouse.screen
+        local screen = mouse.screen.index
         if tags[screen][i] then
            awful.tag.viewonly(tags[screen][i])
         end
 end
 
 local function show_both(i)
-      local screen = mouse.screen
+      local screen = mouse.screen.index
       if tags[screen][i] then
           awful.tag.viewtoggle(tags[screen][i])
       end
 end
 
 local function move_to_tag(i)
-      if client.focus and tags[client.focus.screen][i] then
-        awful.client.movetotag(tags[client.focus.screen][i])
+      if client.focus and tags[client.focus.screen.index][i] then
+        awful.client.movetotag(tags[client.focus.screen.index][i])
       end
 end
 

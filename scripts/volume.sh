@@ -57,6 +57,10 @@ if [[ -n $have_pulse ]]; then
   # 
   #
   operator=$1
+  if [ "$operator" = "m" ]; then
+          pactl set-sink-mute $active_sink toggle
+          exit
+  fi
   vol_inc="1"
   vol_pct_min=0
   vol_pct_max=100

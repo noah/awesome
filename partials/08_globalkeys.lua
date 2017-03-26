@@ -120,8 +120,9 @@ globalkeys = awful.util.table.join(
                                                         -- n.b.: must be
                                                         -- os.execute so
                                                         -- it will block
-                                                        os.execute("maim -s " .. _fn, false)
-                                                        awful.util.spawn("gvfs-open " .. _fn, false)
+                                                        -- os.execute("maim -s " .. _fn, false)
+                                                        os.execute("gnome-screenshot -i " .. _fn, false)
+                                                        -- awful.util.spawn("gvfs-open " .. _fn, false)
                                                 end),
       awful.key({ "Shift" }, "Print",         function () awful.util.spawn("maim -i $(xdotool getactivewindow)", false)end),
 
@@ -137,7 +138,9 @@ globalkeys = awful.util.table.join(
       awful.key({ modkey, "Control", }, 
                   "Up",     function () awful.util.spawn(script_dir .. "/volume.sh +", false) end, "Increase volume 1%"),
       awful.key({ modkey, "Control", }, 
-                  "Down",   function () awful.util.spawn(script_dir .. "/volume.sh -", false) end, "Decrease volume 1%"),
+                  "Down",   function () awful.util.spawn(script_dir .. "/volume.sh -", false) end, "Decrease volume 2%"),
+      awful.key({ modkey, "Control", }, 
+                  "m",   function () awful.util.spawn(script_dir .. "/volume.sh m", false) end, "Toggle mute"),
       awful.key({ modkey, "Control", }, 
                   "Next",   function () awful.util.spawn(script_dir .. "/playback.sh next",false) end, "Skip to next track"),
       awful.key({ modkey, "Control", }, 

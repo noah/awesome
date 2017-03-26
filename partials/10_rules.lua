@@ -49,13 +49,13 @@ awful.rules.rules = {
                     -- tag = tags[1][2]
             } },
 
-    { rule = { 
-            -- Firefox file selection dialog (e.g.)
-            class = "Firefox", instance="firefox" },                
-            properties = { 
-                    floating = false
-                    -- tag = tags[1][2]
-            } },
+    -- { rule = { 
+    --         -- Firefox file selection dialog (e.g.)
+    --         class = "Firefox", instance="firefox" },                
+    --         properties = { 
+    --                 floating = false
+    --                 -- tag = tags[1][2]
+    --         } },
     { rule = { 
             class = "Pidgin", instance="Pidgin" },
             properties = {

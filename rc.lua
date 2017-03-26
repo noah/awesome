@@ -4,6 +4,9 @@
 -- load core lua modules 
 --
 --
+--
+gears           = require("gears")
+wibox           = require("wibox")
 awful           = require("awful")
 awful.rules     = require("awful.rules")
 beautiful       = require("beautiful")
@@ -55,10 +58,10 @@ log             = gnarly.util.log
 --
 --
 config_dir          = awful.util.getdir("config")
-script_dir          = join({config_dir, "scripts"}, "/")
-local partials_dir  = join({config_dir, "partials"}, "/")
+script_dir          = join({config_dir, "scripts"}, "")
+local partials_dir  = join({config_dir, "partials"}, "")
 local partials      = scandir(partials_dir)
 for i = 1, #partials do
-  -- log(partials[i])
-  dofile(join({partials_dir, partials[i]}, "/"))
+  pf = join({partials_dir, partials[i]}, "/")
+  dofile(pf)
 end

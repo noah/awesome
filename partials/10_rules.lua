@@ -45,17 +45,13 @@ awful.rules.rules = {
             } },
     { rule = { class = "Firefox", instance="Navigator" },                
             properties = { 
-                    floating = false
+                    floating = false,
+                    ontop=false,
+                    sticky=false,
+                    maximized=false
                     -- tag = tags[1][2]
             } },
 
-    -- { rule = { 
-    --         -- Firefox file selection dialog (e.g.)
-    --         class = "Firefox", instance="firefox" },                
-    --         properties = { 
-    --                 floating = false
-    --                 -- tag = tags[1][2]
-    --         } },
     { rule = { 
             class = "Pidgin", instance="Pidgin" },
             properties = {
@@ -101,8 +97,5 @@ awful.rules.rules = {
     { rule = { class = "devede" },                  properties = { floating = true} },
     { rule = { class = "Devede" },                  properties = { floating = true} },
     { rule = { class = "XMathematica" },            properties = { floating = false} }
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
 }
 -- }}}

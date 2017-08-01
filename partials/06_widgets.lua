@@ -195,20 +195,20 @@ volbox:buttons(awful.util.table.join(
     awful.button({ }, 4, function () vicious.contrib.pulse.add(-5, active_sink) end)
 ))
 -- 
-vicious.register(musicbox, gnarly.cmus, 
-    function(widget, T)
-      if T["{error}"] then return "error: " .. T["{status}"] end
-      if T["{status}"] == "stopped" or T["{status}"] == "not running" then 
-        return printf("♫ %s", T["{status_symbol}"]) 
-      end
-
-      return printf("♫  %s %s %s %s", 
-                              T["{status_symbol}"],
-                              T["{song}"],
-                              T["{remains_pct}"],
-                              T["{CRS}"]
-                          )
-    end, 2)
+-- vicious.register(musicbox, gnarly.cmus, 
+--     function(widget, T)
+--       if T["{error}"] then return "error: " .. T["{status}"] end
+--       if T["{status}"] == "stopped" or T["{status}"] == "not running" then 
+--         return printf("♫ %s", T["{status_symbol}"]) 
+--       end
+-- 
+--       return printf("♫  %s %s %s %s", 
+--                               T["{status_symbol}"],
+--                               T["{song}"],
+--                               T["{remains_pct}"],
+--                               T["{CRS}"]
+--                           )
+--     end, 2)
 
 vicious.register(batterybox, gnarly.battery,
     function(widget, T)

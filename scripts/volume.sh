@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 # Print and optionall adjust pulse audio active sink volume.  This is

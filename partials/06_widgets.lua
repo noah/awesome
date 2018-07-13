@@ -70,7 +70,7 @@ pacbox      = wibox.widget.textbox()
 wifibox     = wibox.widget.textbox()
 musicbox    = wibox.widget.textbox()
 mdirbox     = wibox.widget.textbox()
-batterybox  = wibox.widget.textbox()
+--batterybox  = wibox.widget.textbox()
 
 cpugraph    = awful.widget.graph()
 cpugraph:set_width(100)
@@ -143,7 +143,7 @@ for s = 1, screen.count() do
     bot_right_layout:add(delimiter)
     bot_right_layout:add(wifibox)
     bot_right_layout:add(delimiter)
-    bot_right_layout:add(batterybox)
+    --bot_right_layout:add(batterybox)
     bot_right_layout:add(delimiter)
 
     local top_layout = wibox.layout.align.horizontal()
@@ -195,25 +195,25 @@ volbox:buttons(awful.util.table.join(
     awful.button({ }, 4, function () vicious.contrib.pulse.add(-5, active_sink) end)
 ))
 -- 
--- vicious.register(musicbox, gnarly.cmus, 
---     function(widget, T)
---       if T["{error}"] then return "error: " .. T["{status}"] end
---       if T["{status}"] == "stopped" or T["{status}"] == "not running" then 
---         return printf("♫ %s", T["{status_symbol}"]) 
---       end
--- 
---       return printf("♫  %s %s %s %s", 
---                               T["{status_symbol}"],
---                               T["{song}"],
---                               T["{remains_pct}"],
---                               T["{CRS}"]
---                           )
---     end, 2)
+ vicious.register(musicbox, gnarly.cmus, 
+     function(widget, T)
+       if T["{error}"] then return "error: " .. T["{status}"] end
+       if T["{status}"] == "stopped" or T["{status}"] == "not running" then 
+         return printf("♫ %s", T["{status_symbol}"]) 
+       end
+ 
+       return printf("♫  %s %s %s %s", 
+                               T["{status_symbol}"],
+                               T["{song}"],
+                               T["{remains_pct}"],
+                               T["{CRS}"]
+                           )
+     end, 2)
 
-vicious.register(batterybox, gnarly.battery,
-    function(widget, T)
-        return printf("%s: %u%%", T['{status}'], T['{charge}'])
-    end, 11)
+-- vicious.register(batterybox, gnarly.battery,
+--     function(widget, T)
+--         return printf("%s: %u%%", T['{status}'], T['{charge}'])
+--     end, 11)
 
 -- 
 vicious.register(mdirbox, gnarly.mdir, 

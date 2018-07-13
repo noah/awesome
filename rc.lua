@@ -65,3 +65,10 @@ for i = 1, #partials do
   pf = join({partials_dir, partials[i]}, "/")
   dofile(pf)
 end
+
+-- local calendar = require("calendar")
+-- calendar({show_evt='button::press',
+--           hide_evt='button::press',
+--           cal_prev="Left",
+--           cal_next="Right"
+--   }):attach(datebox)

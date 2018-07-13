@@ -43,16 +43,16 @@ function timeToHex(n, fact)
   return num2hex( n )
 end
 
-local over60  = 256/60;
-local over24  = 256/24;
-local hext = timer({timeout=1})
-hext:connect_signal("timeout", function ()
-  local dt      = os.date("*t")
-  local h       = addLeadingZero(timeToHex(dt.hour, over24))
-  local m       = addLeadingZero(timeToHex(dt.min, over60))
-  local s       = addLeadingZero(timeToHex(dt.sec, over60))
-  local hex     = '"#' .. h .. m .. s .. '"'
-  -- log(hex)
-  awful.util.spawn_with_shell('hsetroot -solid ' .. hex)
-end)
-hext:start()
+-- local over60  = 256/60;
+-- local over24  = 256/24;
+-- local hext = timer({timeout=1})
+-- hext:connect_signal("timeout", function ()
+--   local dt      = os.date("*t")
+--   local h       = addLeadingZero(timeToHex(dt.hour, over24))
+--   local m       = addLeadingZero(timeToHex(dt.min, over60))
+--   local s       = addLeadingZero(timeToHex(dt.sec, over60))
+--   local hex     = '"#' .. h .. m .. s .. '"'
+--   -- log(hex)
+--   awful.util.spawn_with_shell('hsetroot -solid ' .. hex)
+-- end)
+-- hext:start()

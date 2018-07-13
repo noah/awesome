@@ -52,6 +52,14 @@ awful.rules.rules = {
                     -- tag = tags[1][2]
             } },
 
+    { rule = { class = "Evince", instance="evince" },                
+            properties = { 
+                    floating = false,
+                    ontop=false,
+                    sticky=false,
+                    maximized=false
+                    -- tag = tags[1][2]
+            } },
     { rule = { 
             class = "Pidgin", instance="Pidgin" },
             properties = {

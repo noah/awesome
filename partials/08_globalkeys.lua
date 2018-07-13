@@ -121,7 +121,7 @@ globalkeys = awful.util.table.join(
                                                         -- os.execute so
                                                         -- it will block
                                                         -- os.execute("maim -s " .. _fn, false)
-                                                        os.execute("gnome-screenshot -i " .. _fn, false)
+                                                        awful.util.spawn("gnome-screenshot -i " .. _fn, false)
                                                         -- awful.util.spawn("gvfs-open " .. _fn, false)
                                                 end),
       awful.key({ "Shift" }, "Print",         function () awful.util.spawn("maim -i $(xdotool getactivewindow)", false)end),

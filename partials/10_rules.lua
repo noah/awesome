@@ -18,6 +18,7 @@ awful.rules.rules = {
                         border_width = beautiful.border_width,
                         border_color = beautiful.border_normal,
                         focus = awful.client.focus.filter,
+                        screen = awful.screen.focused,
                         keys = clientkeys,
                         buttons = clientbuttons } },
     -- { rule = { class = "xboard" },      properties = { floating = true } },

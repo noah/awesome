@@ -72,9 +72,9 @@ musicbox    = wibox.widget.textbox()
 mdirbox     = wibox.widget.textbox()
 --batterybox  = wibox.widget.textbox()
 
-cpugraph    = awful.widget.graph()
-cpugraph:set_width(100)
-cpugraph:set_color(beautiful.bg_focus)
+-- cpugraph    = awful.widget.graph()
+-- cpugraph:set_width(100)
+-- cpugraph:set_color(beautiful.bg_focus)
 -- cpugraph:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
 
 
@@ -114,7 +114,7 @@ for s = 1, screen.count() do
     top_right_layout:add(delimiter)
     top_right_layout:add(uptimebox)
     top_right_layout:add(delimiter)
-    top_right_layout:add(cpugraph)
+    -- top_right_layout:add(cpugraph)
     top_right_layout:add(delimiter)
     top_right_layout:add(membox)
     top_right_layout:add(delimiter)
@@ -185,7 +185,7 @@ local active_sink = tonumber(
         awful.util.pread("pacmd list-sinks | grep '* index' -A 20|grep -Po '(?<=\tname: <).*(?=>)'") )
 
 vicious.register(wifibox,   vicious.widgets.wifi,   "${ssid} ${link}% ${rate} MB/s", 16, "wlp3s0")
-vicious.register(cpugraph, vicious.widgets.cpu, "$1", 3)
+-- vicious.register(cpugraph, vicious.widgets.cpu, "$1", 3)
 
 vicious.register(volbox, vicious.contrib.pulse, "vol $1%", 2, active_sink)
 

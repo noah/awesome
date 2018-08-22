@@ -61,6 +61,14 @@ awful.rules.rules = {
                     maximized=false
                     -- tag = tags[1][2]
             } },
+    { rule = { class = "libreoffice-draw", instance="libreoffice" },                
+            properties = { 
+                    floating = false,
+                    ontop=false,
+                    sticky=false,
+                    maximized=false
+                    -- tag = tags[1][2]
+            } },
     { rule = { 
             class = "Pidgin", instance="Pidgin" },
             properties = {
@@ -78,7 +86,6 @@ awful.rules.rules = {
             } },
     { rule = { class = "Plugin-container", instance = "plugin-container" },                    properties = { floating = true } },
     { rule = { class = "gimp" },                    properties = { floating = true } },
-    --    { rule = { class = "libreoffice-calc" },        properties = { floating = false } },
     --    { rule = { instance = "libreoffice" },          properties = { floating = false } },
     --    { rule = { class = "libreoffice-writer" },      properties = { floating = false } },
     { rule = { class = "mplayer" },                 properties = { floating = false } },

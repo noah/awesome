@@ -2,8 +2,7 @@ local wibox     = require("wibox")
 local vicious   = require("vicious")
 vicious.contrib = require("vicious.contrib")
 
-gnarly = require("gnarly")
-local log = gnarly.util.log
+gnarly.util = require("gnarly.util")
 
 -- {{{ Wibox
 -- Create widgets
@@ -165,7 +164,7 @@ gnarly.cmus     = require("gnarly.cmus")
 gnarly.mdir     = require("gnarly.mdir")
 -- gnarly.yaourt   = require("gnarly.yaourt")
 -- gnarly.yaourt   = require("gnarly.yaourt")
-gnarly.battery  = require("gnarly.battery")
+--gnarly.battery  = require("gnarly.battery")
 
 -- vicious widgets
 vicious.register(datebox, vicious.widgets.date, "%A %Y-%m-%d %H:%M %Z", 60)
@@ -181,6 +180,7 @@ vicious.register(membox, vicious.widgets.mem,
     end, 13)
 -- 
 
+-- TODO replace with awful spawn easy_async
 local active_sink = tonumber( 
         awful.util.pread("pacmd list-sinks | grep '* index' -A 20|grep -Po '(?<=\tname: <).*(?=>)'") )
 

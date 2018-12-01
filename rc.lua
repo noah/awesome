@@ -17,7 +17,7 @@ require("awful.autofocus")
 layouts =
 {
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
+    --awful.layout.suit.max.fullscreen,
     awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
@@ -42,17 +42,13 @@ printf          = string.format
 -- load my lua modules
 --
 --
-gnarly          = require("gnarly")
-require("gnarly.util")
-
-keydoc          = require("keydoc")
+local util = require("gnarly.util")
+keydoc                = require("keydoc")
 
 
 -- export my functions
 --
 --
-scandir         = gnarly.util.scandir
-log             = gnarly.util.log
 
 -- load modular configs
 --
@@ -60,7 +56,7 @@ log             = gnarly.util.log
 config_dir          = awful.util.getdir("config")
 script_dir          = join({config_dir, "scripts"}, "")
 local partials_dir  = join({config_dir, "partials"}, "")
-local partials      = scandir(partials_dir)
+local partials      = util.scandir(partials_dir)
 for i = 1, #partials do
   pf = join({partials_dir, partials[i]}, "/")
   dofile(pf)

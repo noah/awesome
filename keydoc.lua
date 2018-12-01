@@ -17,12 +17,8 @@ local capi      = {
   client = client
 }
 gnarly = require("gnarly")
-local log = gnarly.util.log
-
-
-module("keydoc")
-
-
+local log = gnarly.log
+local keydoc = {}
 
 -- doc is a table of Keys indexed by group name
 local doc = { }
@@ -78,7 +74,7 @@ local function unilen(str)
 end
 
 -- Start a new group
-function group(name)
+function keydoc.group(name)
   currentgroup = name
   return {}
 end
@@ -126,3 +122,5 @@ function display()
   position = "bottom_left"
 }).id
 end 
+
+return keydoc

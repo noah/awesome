@@ -4,6 +4,8 @@ awful.menu.menu_keys.up     = { "k" }
 awful.menu.menu_keys.down   = { "j" }
 awful.menu.menu_keys.close  = { "q", "Escape" }
 
+local keydoc = require("keydoc")
+
 globalkeys = awful.util.table.join(
 
     keydoc.group("Screen navigation / movement"),
@@ -109,21 +111,27 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     keydoc.group("Program keys"),
-      awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end, "open terminal (no daemon)"),
+      awful.key({ "Control"}, "q", function () return false end, "prevent firefox from quitting"),
+      -- awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end, "open terminal (no daemon)"),
       awful.key({ modkey, "Shift"   }, "Return", function() awful.util.spawn(terminald, false) end, "open terminal (daemon)"),
       awful.key({ modkey,           }, "e", function() awful.util.spawn("nautilus", false) end, "open file manager GUI"),
 
       -- keybindings
       awful.key({         }, "Scroll_Lock",   function () awful.util.spawn("killall ssh; xscreensaver-command -lock",false)    end),
+
+      -- screen capture
       awful.key({         }, "Print",         function () 
-                                                        local _fn="/home/noah/screenshot_" .. os.date("%Y-%m-%d_%H:%M:%S") .. ".png"
-                                                        -- n.b.: must be
-                                                        -- os.execute so
-                                                        -- it will block
-                                                        -- os.execute("maim -s " .. _fn, false)
-                                                        awful.util.spawn("maim -s " .. _fn, false)
-                                                        -- awful.util.spawn("gvfs-open " .. _fn, false)
+                                                       awful.util.spawn_with_shell("maim -s | xclip -selection clipboard -t image/png", false)
+                                                       
                                                 end),
+
+      awful.key({ modkey }, "Print",         function () 
+                                                       local _fn="/home/noah/screen_capture_" .. os.date("%Y-%m-%d_%H:%M:%S") .. ".png"
+                                                       awful.util.spawn("maim -s " .. _fn, false)
+                                                       awful.util.spawn("exiftool -all= " .. _fn, false)
+                                                end),
+
+
     -- winamp-stylez
     -- volume
     --  Up:      Num Pad up

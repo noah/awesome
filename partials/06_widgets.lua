@@ -1,8 +1,12 @@
 local wibox     = require("wibox")
 local vicious   = require("vicious")
+
+local calendar = require("calendar")
 vicious.contrib = require("vicious.contrib")
 
 gnarly.util = require("gnarly.util")
+local chomp = gnarly.util.chomp
+local log = gnarly.util.log
 
 -- {{{ Wibox
 -- Create widgets
@@ -65,16 +69,15 @@ datebox     = wibox.widget.textbox()
 membox      = wibox.widget.textbox()
 uptimebox   = wibox.widget.textbox()
 volbox      = wibox.widget.textbox()
-pacbox      = wibox.widget.textbox()
-wifibox     = wibox.widget.textbox()
-musicbox    = wibox.widget.textbox()
-mdirbox     = wibox.widget.textbox()
+netbox     = wibox.widget.textbox()
+--musicbox    = wibox.widget.textbox()
+--mdirbox     = wibox.widget.textbox()
 --batterybox  = wibox.widget.textbox()
 
--- cpugraph    = awful.widget.graph()
--- cpugraph:set_width(100)
--- cpugraph:set_color(beautiful.bg_focus)
--- cpugraph:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+cpugraph    = awful.widget.graph()
+cpugraph:set_width(100)
+cpugraph:set_color(beautiful.bg_focus)
+--cpugraph:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
 
 
 for s = 1, screen.count() do
@@ -113,11 +116,7 @@ for s = 1, screen.count() do
     top_right_layout:add(delimiter)
     top_right_layout:add(uptimebox)
     top_right_layout:add(delimiter)
-    -- top_right_layout:add(cpugraph)
-    top_right_layout:add(delimiter)
     top_right_layout:add(membox)
-    top_right_layout:add(delimiter)
-    top_right_layout:add(wifibox)
     top_right_layout:add(delimiter)
     top_right_layout:add(datebox)
     top_right_layout:add(delimiter)
@@ -126,33 +125,34 @@ for s = 1, screen.count() do
     -- Now bring it all together (with the tasklist in the middle)
     local top_layout = wibox.layout.align.horizontal()
     top_layout:set_left(top_left_layout)
-    top_layout:set_middle(mytasklist[s])
+    --top_layout:set_middle(mytasklist[s])
     top_layout:set_right(top_right_layout)
 
     -- define bottom layout
     local bot_left_layout = wibox.layout.fixed.horizontal()
     bot_left_layout:add(delimiter)
-    bot_left_layout:add(mdirbox)
+    --bot_left_layout:add(mdirbox)
 
     -- local bot_middle_layout = wibox.layout.fixed.horizontal()
     local bot_right_layout = wibox.layout.fixed.horizontal()
     bot_right_layout:add(volbox)
     bot_right_layout:add(delimiter)
-    bot_right_layout:add(musicbox)
-    bot_right_layout:add(delimiter)
-    bot_right_layout:add(wifibox)
+    --bot_right_layout:add(musicbox)
+    --bot_right_layout:add(delimiter)
+    bot_right_layout:add(netbox)
     bot_right_layout:add(delimiter)
     --bot_right_layout:add(batterybox)
+    bot_right_layout:add(cpugraph)
     bot_right_layout:add(delimiter)
 
-    local top_layout = wibox.layout.align.horizontal()
-    top_layout:set_left(top_left_layout)
-    top_layout:set_middle(mytasklist[s])
-    top_layout:set_right(top_right_layout)
+    --local top_layout = wibox.layout.align.horizontal()
+    --top_layout:set_left(top_left_layout)
+    --top_layout:set_middle(mytasklist[s])
+    --top_layout:set_right(top_right_layout)
 
     local bot_layout = wibox.layout.align.horizontal()
     bot_layout:set_left(bot_left_layout)
-    -- bot_layout:set_middle(mytasklist[s])
+    bot_layout:set_middle(mytasklist[s])
     bot_layout:set_right(bot_right_layout)
 
     mywibox_top[s]:set_widget(top_layout)
@@ -176,39 +176,55 @@ vicious.register(uptimebox, vicious.widgets.uptime,
 -- 
 vicious.register(membox, vicious.widgets.mem,    
     function(widget, args)
-        return printf("mem %d%% (%d/%d GB)", args[1], math.floor(args[2]/1024.0), math.floor(args[3]/1024.0))
+        return printf("mem %d/%d GB", math.floor(args[2]/1024.0), math.floor(args[3]/1024.0))
     end, 13)
 -- 
 
--- TODO replace with awful spawn easy_async
-local active_sink = tonumber( 
-        awful.util.pread("pacmd list-sinks | grep '* index' -A 20|grep -Po '(?<=\tname: <).*(?=>)'") )
-
-vicious.register(wifibox,   vicious.widgets.wifi,   "${ssid} ${link}% ${rate} MB/s", 16, "wlp3s0")
--- vicious.register(cpugraph, vicious.widgets.cpu, "$1", 3)
-
-vicious.register(volbox, vicious.contrib.pulse, "vol $1%", 2, active_sink)
-
-volbox:buttons(awful.util.table.join(
-    awful.button({ }, 1, function () awful.util.spawn("pavucontrol") end),
-    awful.button({ }, 5, function () vicious.contrib.pulse.add(5, active_sink) end),
-    awful.button({ }, 4, function () vicious.contrib.pulse.add(-5, active_sink) end)
-))
 -- 
- vicious.register(musicbox, gnarly.cmus, 
-     function(widget, T)
-       if T["{error}"] then return "error: " .. T["{status}"] end
-       if T["{status}"] == "stopped" or T["{status}"] == "not running" then 
-         return printf("♫ %s", T["{status_symbol}"]) 
-       end
- 
-       return printf("♫  %s %s %s %s", 
-                               T["{status_symbol}"],
-                               T["{song}"],
-                               T["{remains_pct}"],
-                               T["{CRS}"]
-                           )
-     end, 2)
+local function chomp(s)
+        return string.gsub(s,"\n","")
+end
+
+-- note:  easy_async_with_shell *adds a newline to any result string* so
+-- doing ... | tr -d '[:space:]' in the shell call DOES NOT WORK.  MUST
+-- chomp strings in code. This is hugely misleading. *slaps forehead*
+
+local cmd_active_sink = "pacmd list-sinks | grep '* index' -A 20|grep -Po '(?<=\tname: <).*(?=>)'"
+awful.spawn.easy_async_with_shell(cmd_active_sink, function(active_sink)
+        active_sink = chomp(active_sink)
+        vicious.register(volbox, vicious.contrib.pulse, "vol $1%", 2, active_sink)
+        volbox:buttons(awful.util.table.join(
+            awful.button({ }, 1, function () awful.util.spawn("pavucontrol") end),
+            awful.button({ }, 5, function () vicious.contrib.pulse.add(5, active_sink) end),
+            awful.button({ }, 4, function () vicious.contrib.pulse.add(-5, active_sink) end)
+        ))
+end)
+
+local cmd_active_iface = "ip -4 route show to default | cut -d' ' -f5"
+awful.spawn.easy_async_with_shell(cmd_active_iface, function(iface)
+        iface = chomp(iface)
+        local fmt = string.format("${%s up_mb}/${%s down_mb} MB/s", iface, iface)
+        vicious.register(netbox,  vicious.widgets.net, fmt, 2, iface)
+end)
+
+
+vicious.register(cpugraph, vicious.widgets.cpu, "$1", 3)
+
+-- 
+--vicious.register(musicbox, gnarly.cmus, 
+--function(widget, T)
+--        if T["{error}"] then return "error: " .. T["{status}"] end
+--        if T["{status}"] == "stopped" or T["{status}"] == "not running" then 
+--                return printf("♫ %s", T["{status_symbol}"]) 
+--        end
+--
+--        return printf("♫  %s %s %s %s", 
+--        T["{status_symbol}"],
+--        T["{song}"],
+--        T["{remains_pct}"],
+--        T["{CRS}"]
+--        )
+--end, 2)
 
 -- vicious.register(batterybox, gnarly.battery,
 --     function(widget, T)
@@ -216,21 +232,21 @@ volbox:buttons(awful.util.table.join(
 --     end, 11)
 
 -- 
-vicious.register(mdirbox, gnarly.mdir, 
-    function(widget, mailboxes)
-      _t    = {}
-      count = 0
-      for k, v in pairs(mailboxes) do
-        table.insert(_t, "{" .. k .. "→ " .. v .. "}")
-        count = count + 1
-      end
-      if count > 0 then
-        return join(_t, " ")
-      else
-        return "✓"
-      end
-
-    end, 1, "/home/noah/mail")
+-- vicious.register(mdirbox, gnarly.mdir, 
+--     function(widget, mailboxes)
+--       _t    = {}
+--       count = 0
+--       for k, v in pairs(mailboxes) do
+--         table.insert(_t, "{" .. k .. "→ " .. v .. "}")
+--         count = count + 1
+--       end
+--       if count > 0 then
+--         return join(_t, " ")
+--       else
+--         return "✓"
+--       end
+-- 
+--     end, 1, "/home/noah/mail")
 -- 
 -- 
 -- vicious.register(pacbox, gnarly.yaourt,

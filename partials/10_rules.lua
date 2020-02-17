@@ -92,8 +92,8 @@ awful.rules.rules = {
     { rule = { class = "MPlayer" },                 properties = { floating = false } },
     { rule = { instance="gtkpod" },                 properties = { floating = false } },
     { rule = { 
-      class = "Nautilus",
-      instance="nautilus" },
+      class = "Org.gnome.Nautilus",
+      instance="org.gnome.Nautilus" },
       properties = { 
         floating = false,
         sticky = false

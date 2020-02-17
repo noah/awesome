@@ -3,7 +3,7 @@
 ---------------------------
 
 theme = {}
-theme.font          = "Monaco 10"
+theme.font          = "Monaco 9"
 
 
 -- You can use your own command to set your wallpaper

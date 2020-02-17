@@ -90,12 +90,12 @@ globalkeys = awful.util.table.join(
                 end
         end, "show maximize menu" ),
         awful.key({ modkey, "Control" }, "n", awful.client.restore, "restore client"),
-        awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end, "resize client if view allows-left"),
-        awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end, "resize client if view allows-right"),
-        --awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end, "resize client if view allows-left"),
-        --awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end, "resize client if view allows-left"),
-        --awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end, "resize client if view allows-left"),
-        --awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end, "resize client if view allows-left"),
+        awful.key({ modkey,           }, "Right",     function () awful.tag.incmwfact( 0.05)    end, "resize client if view allows-left"),
+        awful.key({ modkey,           }, "Left",     function () awful.tag.incmwfact(-0.05)    end, "resize client if view allows-right"),
+        awful.key({ modkey, "Shift"   }, "Left",     function () awful.tag.incnmaster( 1)      end, "resize client if view allows-left"),
+        awful.key({ modkey, "Shift"   }, "Right",     function () awful.tag.incnmaster(-1)      end, "resize client if view allows-left"),
+        awful.key({ modkey, "Control" }, "Left",     function () awful.tag.incncol( 1)         end, "resize client if view allows-left"),
+        awful.key({ modkey, "Control" }, "Right",     function () awful.tag.incncol(-2)         end, "resize client if view allows-left"),
 
 
     keydoc.group("Layouts"),
@@ -112,7 +112,7 @@ globalkeys = awful.util.table.join(
     -- Standard program
     keydoc.group("Program keys"),
       awful.key({ "Control"}, "q", function () return false end, "prevent firefox from quitting"),
-      -- awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end, "open terminal (no daemon)"),
+      awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end, "open terminal (no daemon)"),
       awful.key({ modkey, "Shift"   }, "Return", function() awful.util.spawn(terminald, false) end, "open terminal (daemon)"),
       awful.key({ modkey,           }, "e", function() awful.util.spawn("nautilus", false) end, "open file manager GUI"),
 

@@ -96,6 +96,7 @@ awful.rules.rules = {
       instance="org.gnome.Nautilus" },
       properties = { 
         floating = false,
+        maximized = false,
         sticky = false
       } 
     },

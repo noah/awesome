@@ -167,7 +167,7 @@ gnarly.mdir     = require("gnarly.mdir")
 --gnarly.battery  = require("gnarly.battery")
 
 -- vicious widgets
-vicious.register(datebox, vicious.widgets.date, "%A %Y-%m-%d %H:%M %Z", 60)
+vicious.register(datebox, vicious.widgets.date, "%A %Y-%m-%d %H:%M %T", 1)
 -- 
 vicious.register(uptimebox, vicious.widgets.uptime,
     function (widget, args)
